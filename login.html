@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>UP776060 Dashboard Login</title>
+  <meta name="description" content="The Login Page of the Web VR Dashboard Prototype">
+  <meta name="author" content="UP776060">
+  <link rel="stylesheet" type="text/css" href="signupstyle.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+        <form id="login" action="">
+            Username: <input type="text" id="Username" value="Enter Username"><br>
+            Password: <input type="password" id="Password" value="Enter Password"><br>
+        <input type="submit" value="Submit">
+        <input type="checkbox" onclick="showPass()">Show Password 
+        </form>
+
+    <script>
+    
+
+        function showPass(){
+            var cb = document.getElementById("Password");
+            if (cb.type === "password") {
+                cb.type = "text";
+            }
+            else{
+                cb.type = "password";
+            }
+
+        }
+
+        $("#login").submit(function(event){
+
+            event.preventDefault();
+
+            console.log("stuff happening");
+
+            console.log($("#Username").val());
+
+            var thisurl = "/login/"+$("#Username").val()+"&"+$("#Password").val();
+            console.log(thisurl);
+
+            $.ajax({
+
+                
+                url:thisurl,
+                type:"GET",
+
+                success: function(result) {
+                    console.log(result);
+
+                    if(result == 0)
+                    {
+                        alert('Username or Password is incorrect, please try again!');
+                    }
+                    else {
+                        alert("Login Succesful!");
+                        window.location.replace("/");
+                    }
+                }
+
+            })
+
+            console.log('ok');
+        })
+
+    </script>
+
+</body>
+</html>

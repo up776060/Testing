@@ -1,8 +1,77 @@
-<html>
-<head></head>
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
 <body>
 
-    <?php echo "This is PHP"; ?>
+    <p>This is a demo page to test retrieving data from the database.</p>
+
+    <textarea id="texty" rows="4" cols="50"></textarea>
+
+    <button id="letsgo" type="button">I do stuff!</button>
+
+    <button id="letsadd" type="button">I do adding!</button>
+
+    <script>
+    
+       $("#letsgo").click(function (){
+
+            $.ajax({
+                url:"/getName/776060",
+                type:"GET",
+                success: function(result) {
+                    console.log(result);
+
+                    var data = JSON.parse(result);
+                    console.log(data[0].Name);
+
+                    $("#texty").val("The users name is: " + data[0].Name);
+                }
+            })
+
+            $.ajax({
+                url:"/getPassword/776060",
+                type:"GET",
+                success: function(result) {
+                    console.log(result);
+
+                    var data = result;
+                    console.log(data[0].Password);
+
+                    $("#texty").val($("#texty").val() + "\nThe users password is: " + data[0].Password);
+                }
+            })
+
+       })
+
+       $("#letsadd").click(function (){
+
+            $.ajax({
+                url:"/addUser/user1&SPN&Cas",
+                type:"POST",
+
+                success: function(result) {
+                    console.log(result);
+                }
+
+            })
+
+
+       })
+
+
+    
+    </script>
 
 </body>
 </html>

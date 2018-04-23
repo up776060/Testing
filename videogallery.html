@@ -1,0 +1,81 @@
+<html>
+  <head>
+      <Title>UP776060 Final Year Project Web VR Dashboard Video Gallery</Title>
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+      <script type="text/javascript">
+
+        // Original JavaScript code by Chirp Internet: www.chirp.com.au
+        // Please acknowledge use of this code by including this header.
+
+        function getCookie(name)
+        {
+        var re = new RegExp(name + "=([^;]+)");
+        var value = re.exec(document.cookie);
+        return (value != null) ? unescape(value[1]) : null;
+        }
+
+      </script>  
+  
+  <a-scene>
+
+    <a-assets>
+
+        <video id="vid1" autoplay loop = "true" src="VRSample.mp4" webkit-playsinline></video>
+        <img id="vidicon" src="vrvidicon.jpg">
+
+
+        <img id="playcon" src="iconPlay.png">
+        <img id="pausecon" src="iconPause.png">
+
+        <img id="save" src="save.jpg">
+    </a-assets>
+
+
+        <a-image id="playicon" position = "-0.2 1 -1" src="#playcon" height="0.3" width="0.3" opacity="0.5"></a-image>
+        <a-image id="pauseicon" position = "0.2 1 -1" src="#pausecon" height="0.3" width="0.3" opacity="0.5"></a-image>
+
+        <a-videosphere id="vrvid" src="#vid1"></a-videosphere>
+
+        <a-image id="savexit" src="#save" position = "0 0.5 0" rotation = "-90 0 0"height="0.3" width="0.6"></a-image>
+
+        <a-entity camera look-controls position="0 1.6 0">
+
+                <a-cursor id="cursor" color="blue"></a-cursor>
+
+        </a-entity>
+
+  </a-scene>
+
+  <script>
+  
+    var videoPaused = false;
+
+    document.querySelector("#playicon").addEventListener('click', function(){
+        
+          document.querySelector("#vid1").play();
+    });
+
+    document.querySelector("#pauseicon").addEventListener('click', function(){
+        
+        document.querySelector("#vid1").pause();
+  });
+  
+  </script>
+  
+
+  <script>
+      document.querySelector("#savexit").addEventListener('click', function(){
+          window.location.href = "/";
+      });
+  </script>
+  
+  </body>
+
+
+<html>  

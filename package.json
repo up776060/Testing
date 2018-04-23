@@ -1,0 +1,27 @@
+{
+  "name": "776060dashboard",
+  "version": "1.0.0",
+  "description": "final year project virtual reality dashboard application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/up776060/Testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/up776060/Testing/issues"
+  },
+  "homepage": "https://github.com/up776060/Testing#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "js-cookie": "^2.2.0",
+    "mysql": "^2.15.0"
+  }
+}

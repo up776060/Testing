@@ -1,0 +1,468 @@
+<html>
+  <head>
+      <Title>UP776060 Final Year Project Web VR Dashboard Settings</Title>
+      <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+
+
+  <body>
+
+        <script type="text/javascript">
+
+            // Original JavaScript code by Chirp Internet: www.chirp.com.au
+            // Please acknowledge use of this code by including this header.
+    
+            function getCookie(name)
+            {
+            var re = new RegExp(name + "=([^;]+)");
+            var value = re.exec(document.cookie);
+            return (value != null) ? unescape(value[1]) : null;
+        }
+    
+    </script>
+
+
+    <a-scene>
+        <a-assets>
+            <!-- Image and video assets go here -->  
+            <img id="sky1" src="3601.jpg"> 
+
+            <img id="pink" src="pink.jpg">
+            <img id="black" src="black.jpg">
+            <img id="red" src="red.jpg">
+            <img id="blue" src="blue.jpg">
+            <img id="green" src="green.jpg">
+            <img id="yellow" src="yellow.jpg">
+            <img id="white" src="white.jpg">
+            <img id="orange" src="orange.jpg">
+
+            <img id="switch" src="switch.jpg">
+            <img id="switch2" src="switch2.jpg">
+
+            <img id="roboimg" src="font_roboto.jpg">
+            <img id="kelsimg" src="font_kelsonsans.jpg">
+            <img id="mozimg" src="font_mozilla.jpg">
+            <img id="exoimg" src="font_exo2bold.jpg">
+
+            <img id="save" src="save.jpg">
+
+
+        </a-assets>
+
+        <a-sky id="sky" src="#sky1"></a-sky>
+
+        
+        <a-entity id="title" position="0 1.95 -1" text="font: kelsonsans; color: white; value: Settings; width:3; align: center; opacity: 1" ></a-entity>
+        
+        <!--Background Colour Settings-->
+
+        <a-entity id="bgHeader" position="0 1.75 -1" text="font: kelsonsans; color: white; value: Select Background Colour; width:2; align: center; opacity: 1" ></a-entity>
+
+        <a-image id="pinkBox" position = "-0.5 1.5 -1" src="#pink" height="0.3" width="0.3"></a-image>
+        <a-image id="blackBox" position = "-0.15 1.5 -1" src="#black" height="0.3" width="0.3"></a-image>
+        <a-image id="redBox" position = "0.2 1.5 -1" src="#red" height="0.3" width="0.3"></a-image>
+        <a-image id="blueBox" position = "0.55 1.5 -1" src="#blue" height="0.3" width="0.3"></a-image>
+        <a-image id="greenBox" position = "-0.5 1.15 -1" src="#green" height="0.3" width="0.3"></a-image>
+        <a-image id="yellowBox" position = "-0.15 1.15 -1" src="#yellow" height="0.3" width="0.3"></a-image>
+        <a-image id="orangeBox" position = "0.2 1.15 -1" src="#orange" height="0.3" width="0.3"></a-image>
+        <a-image id="whiteBox" position = "0.55 1.15 -1" src="#white" height="0.3" width="0.3"></a-image>
+
+        <a-image id="switchToFont" position = "-0.3 0.80 -1" src="#switch" height="0.3" width="0.6"></a-image>
+        <a-image id="switchToBack" position = "0.35 0.80 -1" src="#switch2" height="0.3" width="0.6"></a-image>
+
+        <a-image id="fontRob" position = "-0.35 1.5 1" rotation = "0 -180 0"src="#roboimg" height="0.3" width="0.6"></a-image>
+        <a-image id="fontKels" position = "0.35 1.5 1" rotation = "0 -180 0"src="#kelsimg" height="0.3" width="0.6"></a-image>
+        <a-image id="fontMoz" position = "-0.35 1 1" rotation = "0 -180 0"src="#mozimg" height="0.3" width="0.6"></a-image>
+        <a-image id="fontExo" position = "0.35 1 1" rotation = "0 -180 0"src="#exoimg" height="0.3" width="0.6"></a-image>
+
+
+        <a-image id="savexit" src="#save" position = "0 0.5 0" rotation = "-90 0 0"height="0.3" width="0.6"></a-image>
+
+        <a-entity camera look-controls position="0 1.6 0">
+
+                <a-cursor id="cursor" color="blue"></a-cursor>
+
+        </a-entity>
+
+    </a-scene>
+
+
+    <script>
+    
+        var thisUser = getCookie('userLoggedIn');
+        console.log(thisUser);
+
+        var thisUrl = "/getSettings/" + thisUser;
+        console.log(thisUrl);
+
+        $.ajax({
+
+            url:thisUrl,
+            type:"GET",
+
+            success: function(result) {
+            console.log(result);
+
+            console.log(result[0].bgCol);
+
+            var storedCol = result[0].bgCol;
+            var storedFont = result[0].font;
+            var storedFontCol = result[0].fontCol;
+
+            // Font
+
+            if (storedFont == 1){
+                document.querySelector("#title").setAttribute('text','font', 'roboto');
+            }
+
+            if (storedFont == 2){
+                document.querySelector("#title").setAttribute('text','font', 'kelsonsans');
+            }
+
+            if (storedFont == 3){
+                document.querySelector("#title").setAttribute('text','font', 'mozillavr');
+            }
+
+            if (storedFont == 4){
+                document.querySelector("#title").setAttribute('text','font', 'exo2bold');
+            }
+
+            // Font Colour
+
+            if(storedFontCol == 1){
+                document.querySelector("#title").setAttribute('text','color', 'black');
+            }
+            if(storedFontCol == 2){
+                document.querySelector("#title").setAttribute('text','color', 'red');            
+            }
+            if(storedFontCol == 3){
+                document.querySelector("#title").setAttribute('text','color', 'blue');            
+            }
+            if(storedFontCol == 4){
+                document.querySelector("#title").setAttribute('text','color', 'green');            
+            }
+            if(storedFontCol == 5){
+                document.querySelector("#title").setAttribute('text','color', 'yellow');            
+            }
+            if(storedFontCol == 6){
+                document.querySelector("#title").setAttribute('text','color', 'pink');            
+            }
+            if(storedFontCol == 7){
+                document.querySelector("#title").setAttribute('text','color', 'white');            
+            }
+            if(storedFontCol == 8){
+                document.querySelector("#title").setAttribute('text','color', 'orange');            
+            }
+
+            // Background Colour
+
+            if(storedCol == 1){
+                document.querySelector("#sky").setAttribute('color', 'black');
+            }
+            if(storedCol == 2){
+                document.querySelector("#sky").setAttribute('color', 'red');
+            }
+            if(storedCol == 3){
+                document.querySelector("#sky").setAttribute('color', 'blue');
+            }
+            if(storedCol == 4){
+                document.querySelector("#sky").setAttribute('color', 'green');
+            }
+            if(storedCol == 5){
+                document.querySelector("#sky").setAttribute('color', 'yellow');
+            }
+            if(storedCol == 6){
+                document.querySelector("#sky").setAttribute('color', 'pink');
+            }
+            if(storedCol == 7){
+                document.querySelector("#sky").setAttribute('color', 'white');
+            }
+            if(storedCol == 8){
+                document.querySelector("#sky").setAttribute('color', 'orange');
+            }
+        }
+
+
+})
+
+
+    
+    </script>
+
+    <script>
+
+        document.querySelector("#switchToFont").addEventListener('click',function(){
+            document.querySelector("#bgHeader").setAttribute('text','value','Select Font Colour');
+        })
+
+        document.querySelector("#switchToBack").addEventListener('click',function(){
+            document.querySelector("#bgHeader").setAttribute('text','value','Select Background Colour');
+        })
+    
+        // Pink Box 
+
+        document.querySelector("#pinkBox").addEventListener('click', function(){
+
+            console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+            
+            if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+                document.querySelector("#sky").setAttribute('color', 'pink');
+            }
+            else{
+                document.querySelector("#title").setAttribute('text','color', 'pink');
+            }
+            document.querySelector("#cursor").setAttribute('color','pink');
+            console.log('Sky background colour changed!');
+        })
+
+        // Black Box
+
+        document.querySelector("#blackBox").addEventListener('click', function(){
+
+            console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+            if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+                document.querySelector("#sky").setAttribute('color', 'black');
+            }
+            else{
+                document.querySelector("#title").setAttribute('text','color', 'black');
+            }
+            document.querySelector("#cursor").setAttribute('color','black');
+            });
+
+        // Red Box
+
+        document.querySelector("#redBox").addEventListener('click', function(){
+
+            console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+            if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+                document.querySelector("#sky").setAttribute('color', 'red');
+            }
+            else{
+                document.querySelector("#title").setAttribute('text','color', 'red');
+            }
+            document.querySelector("#cursor").setAttribute('color','red');
+            })
+
+        // Blue Box
+
+        document.querySelector("#blueBox").addEventListener('click', function(){
+
+            console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+            if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+                document.querySelector("#sky").setAttribute('color', 'blue');
+            }
+            else{
+                document.querySelector("#title").setAttribute('text','color', 'blue');
+            }
+             document.querySelector("#cursor").setAttribute('color','blue');
+            })
+
+        // Green Box
+
+        document.querySelector("#greenBox").addEventListener('click', function(){
+
+        console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+        if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+            document.querySelector("#sky").setAttribute('color', 'green');
+        }
+        else{
+            document.querySelector("#title").setAttribute('text','color', 'green');
+        }
+        document.querySelector("#cursor").setAttribute('color','green');
+        })
+
+        // Yellow Box
+
+        document.querySelector("#yellowBox").addEventListener('click', function(){
+
+        console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+        if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+            document.querySelector("#sky").setAttribute('color', 'yellow');
+        }
+        else{
+            document.querySelector("#title").setAttribute('text','color', 'yellow');
+        }
+        document.querySelector("#cursor").setAttribute('color','yellow');
+        })
+
+        // Orange Box
+
+        document.querySelector("#orangeBox").addEventListener('click', function(){
+
+        console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+        if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+            document.querySelector("#sky").setAttribute('color', 'orange');
+        }
+        else{
+            document.querySelector("#title").setAttribute('text','color', 'orange');
+        }
+        document.querySelector("#cursor").setAttribute('color','orange');
+        })
+
+        // White Box
+
+        document.querySelector("#whiteBox").addEventListener('click', function(){
+
+        console.log(document.querySelector("#bgHeader").getAttribute('text').value);
+
+        if(document.querySelector("#bgHeader").getAttribute('text').value == 'Select Background Colour'){
+            document.querySelector("#sky").setAttribute('color', 'white');
+        }
+        else{
+            document.querySelector("#title").setAttribute('text','color', 'white');
+        }
+        document.querySelector("#cursor").setAttribute('color','white');
+        })
+
+
+        document.querySelector("#fontRob").addEventListener('click', function(){
+            document.querySelector("#title").setAttribute('text','font','roboto');
+        })
+
+        document.querySelector("#fontExo").addEventListener('click', function(){
+            document.querySelector("#title").setAttribute('text','font','exo2bold');
+        })
+
+        document.querySelector("#fontMoz").addEventListener('click', function(){
+            document.querySelector("#title").setAttribute('text','font','mozillavr');
+        })
+
+        document.querySelector("#fontKels").addEventListener('click', function(){
+            document.querySelector("#title").setAttribute('text','font','kelsonsans');
+        })
+        
+        document.querySelector("#savexit").addEventListener('click', function(){
+            console.log("Updating User Preferences");
+
+            var username = getCookie('userLoggedIn');
+            console.log("Cookie: "+ username);
+
+            var font = document.querySelector("#title").getAttribute('text').font;
+            var bgColour = document.querySelector("#sky").getAttribute('color');
+            var fontColour = document.querySelector("#title").getAttribute('text').color;
+
+            console.log(font);
+            console.log(bgColour);
+            console.log(fontColour);
+
+            if (font == 'roboto'){
+                var fontParam = 1;
+            }
+
+            if (font == 'kelsonsans'){
+                var fontParam = 2;
+            }
+
+            if (font == 'mozillavr'){
+                var fontParam = 3;
+            }
+
+            if (font == 'exo2bold'){
+                var fontParam = 4;
+            }
+
+            if (bgColour == 'black'){
+                var bgParam = 1;
+            }
+
+            if (bgColour == 'red'){
+                var bgParam = 2;
+            }
+
+            if (bgColour == 'blue'){
+                var bgParam = 3;
+            }
+
+            if (bgColour == 'green'){
+                var bgParam = 4;
+            }
+
+            if (bgColour == 'yellow'){
+                var bgParam = 5;
+            }
+
+            if (bgColour == 'pink'){
+                var bgParam = 6;
+            }
+
+            if (bgColour == 'white'){
+                var bgParam = 7;
+            }
+
+            if (bgColour == 'orange'){
+                var bgParam = 8;
+            }
+
+            if (fontColour == 'black'){
+                var fontColParam = 1;
+            }
+
+            if (fontColour == 'red'){
+                var fontColParam = 2;
+            }
+
+            if (fontColour == 'blue'){
+                var fontColParam = 3;
+            }
+
+            if (fontColour == 'green'){
+                var fontColParam = 4;
+            }
+
+            if (fontColour == 'yellow'){
+                var fontColParam = 5;
+            }
+
+            if (fontColour == 'pink'){
+                var fontColParam = 6;
+            }
+
+            if (fontColour == 'white'){
+                var fontColParam = 7;
+            }
+
+            if (fontColour == 'orange'){
+                var fontColParam = 8;
+            }
+
+            console.log(fontParam);
+            console.log(bgParam);
+            console.log(fontColParam);
+
+            var thisurl = "/changeSettings/" + username + "&" + fontParam + "&" + bgParam + "&" + fontColParam;
+            console.log(thisurl);
+
+            $.ajax({
+
+                url:thisurl,
+                type:"POST",
+
+                success: function(result) {
+                    console.log(result);
+                }
+
+
+            })
+
+            window.location.href = "/";
+
+        })
+
+
+    </script>
+
+
+  </body>
+
+
+
+
+
+</html>

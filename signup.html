@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>UP776060 Dashboard Signup</title>
+  <meta name="description" content="The Signup Page of the Web VR Dashboard Prototype">
+  <meta name="author" content="UP776060">
+  <link rel="stylesheet" type="text/css" href="signupstyle.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+        <form id="signup" action="">
+            Username: <input type="text" id="Username" value="Enter Username"><br>
+            Password: <input type="text" id="Password" value="Enter Password"><br>
+            Enter Password Again: <input type="text" id="Password2" value="Enter Password Again"><br>
+            Name: <input type="text" id="Name" value="Enter Name"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+    <script>
+    
+
+        $("#signup").submit(function(event){
+
+            event.preventDefault();
+
+            console.log("stuff happening");
+
+            if ($("#Password").val() != $("#Password2").val()){
+                alert('Please change password, must be same value!');
+                return false;
+            } else {
+
+                console.log("stuff more");
+                console.log($("#Username").val());
+
+                var thisurl = "/addUser/"+$("#Username").val()+"&"+$("#Password").val()+"&"+$("#Name").val();
+                console.log(thisurl);
+
+                $.ajax({
+
+                    //url:"/addUser/"+$("#Username").val()+"&"+$("#Password").val()+"&"+$("#Name").val(),
+                    url:thisurl,
+                    type:"POST",
+
+                    success: function(result) {
+                        console.log(result);
+
+                        if(result == "User already exists. Cannot be added to DB")
+                        {
+                            alert('User already exists in database! Please try a different username or sign in.');
+                        }
+                        else {
+                            alert('New user: ' + $("#Username").val() + " has been registered!");
+                            window.location.replace("/login");
+                        }
+                    }
+
+                })
+
+            }
+
+
+        })
+
+    </script>
+
+</body>
+</html>

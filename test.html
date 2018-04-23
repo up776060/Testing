@@ -2,6 +2,7 @@
   <head>
       <Title>UP776060 Final Year Project Web VR Dashboard Demo</Title>
       <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -43,56 +44,227 @@
         
         <a-entity id="clock" position="0 1.18 -1" text="font: kelsonsans; color: white; value: ; width:1.5; align: center; opacity: 1" ></a-entity> 
         
+        <!--
+
         <a-entity camera="userHeight: 1.6" look-controls>
             <a-entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20; radiusInner: 0.13;" material="color: blue; shader: flat" cursor="maxDistance: 20; fuse: true">
-                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.2 0.2 0.2" to="0.5 0.5 0.5" dur="500"></a-animation>
-                        <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="0.5 0.5 0.5" to="0.2 0.2 0.2" dur="1500"></a-animation>
+                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.2 0.2 0.2" to="0.5 0.5 0.5" dur="4000"></a-animation>
+                        <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="0.5 0.5 0.5" to="0.2 0.2 0.2" dur="4000"></a-animation>
                     </a-entity>
+        </a-entity>
+
+        -->
+
+        <a-entity camera look-controls position="0 1.6 0">
+
+                <a-cursor id="cursor" color="blue"></a-cursor>
+
         </a-entity>
         
       </a-scene>
       
+      <script type="text/javascript">
+
+        // Original JavaScript code by Chirp Internet: www.chirp.com.au
+        // Please acknowledge use of this code by including this header.
+      
+        function getCookie(name)
+        {
+          var re = new RegExp(name + "=([^;]+)");
+          var value = re.exec(document.cookie);
+          return (value != null) ? unescape(value[1]) : null;
+        }
+      
+      </script>
+
+      <script>
+      
+      var thisUser = getCookie('userLoggedIn');
+        console.log(thisUser);
+
+        var thisUrl = "/getSettings/" + thisUser;
+        console.log(thisUrl);
+
+        $.ajax({
+
+            url:thisUrl,
+            type:"GET",
+
+            success: function(result) {
+            console.log(result);
+
+            console.log(result[0].bgCol);
+
+            var storedCol = result[0].bgCol;
+            var storedFont = result[0].font;
+            var storedFontCol = result[0].fontCol;
+
+            // Font
+
+            if (storedFont == 1){
+                document.querySelector("#vars").setAttribute('text','font', 'roboto');
+                document.querySelector("#welcomeText").setAttribute('text','font', 'roboto');
+                document.querySelector("#clock").setAttribute('text','font', 'roboto');
+            }
+
+            if (storedFont == 2){
+                document.querySelector("#vars").setAttribute('text','font', 'kelsonsans');
+                document.querySelector("#welcomeText").setAttribute('text','font', 'kelsonsans');
+                document.querySelector("#clock").setAttribute('text','font', 'kelsonsans');
+
+            }
+
+            if (storedFont == 3){
+                document.querySelector("#vars").setAttribute('text','font', 'mozillavr');
+                document.querySelector("#welcomeText").setAttribute('text','font', 'mozillavr');
+                document.querySelector("#clock").setAttribute('text','font', 'mozillavr');
+            }
+
+            if (storedFont == 4){
+                document.querySelector("#vars").setAttribute('text','font', 'exo2bold');
+                document.querySelector("#welcomeText").setAttribute('text','font', 'exo2bold');
+                document.querySelector("#clock").setAttribute('text','font', 'exo2bold');
+            }
+
+            // Font Colour
+
+            if(storedFontCol == 1){
+                document.querySelector("#vars").setAttribute('text','color', 'black');
+                document.querySelector("#welcomeText").setAttribute('text','color', 'black');
+                document.querySelector("#clock").setAttribute('text','color', 'black');
+            }
+            if(storedFontCol == 2){
+                document.querySelector("#vars").setAttribute('text','color', 'red');     
+                document.querySelector("#welcomeText").setAttribute('text','color', 'red');   
+                document.querySelector("#clock").setAttribute('text','color', 'red');          
+            }
+            if(storedFontCol == 3){
+                document.querySelector("#vars").setAttribute('text','color', 'blue');  
+                document.querySelector("#welcomeText").setAttribute('text','color', 'blue');  
+                document.querySelector("#clock").setAttribute('text','color', 'blue');            
+            }
+            if(storedFontCol == 4){
+                document.querySelector("#vars").setAttribute('text','color', 'green'); 
+                document.querySelector("#welcomeText").setAttribute('text','color', 'green');    
+                document.querySelector("#clock").setAttribute('text','color', 'green');               
+            }
+            if(storedFontCol == 5){
+                document.querySelector("#vars").setAttribute('text','color', 'yellow');   
+                document.querySelector("#welcomeText").setAttribute('text','color', 'yellow'); 
+                document.querySelector("#clock").setAttribute('text','color', 'yellow');          
+            }
+            if(storedFontCol == 6){
+                document.querySelector("#vars").setAttribute('text','color', 'pink');  
+                document.querySelector("#welcomeText").setAttribute('text','color', 'pink');  
+                document.querySelector("#clock").setAttribute('text','color', 'pink');            
+            }
+            if(storedFontCol == 7){
+                document.querySelector("#vars").setAttribute('text','color', 'white');  
+                document.querySelector("#welcomeText").setAttribute('text','color', 'white'); 
+                document.querySelector("#clock").setAttribute('text','color', 'white');           
+            }
+            if(storedFontCol == 8){
+                document.querySelector("#vars").setAttribute('text','color', 'orange');  
+                document.querySelector("#welcomeText").setAttribute('text','color', 'orange');  
+                document.querySelector("#clock").setAttribute('text','color', 'orange');            
+            }
+
+            // Background Colour
+
+            if(storedCol == 1){
+                document.querySelector("#sky").setAttribute('color', 'black');
+            }
+            if(storedCol == 2){
+                document.querySelector("#sky").setAttribute('color', 'red');
+            }
+            if(storedCol == 3){
+                document.querySelector("#sky").setAttribute('color', 'blue');
+            }
+            if(storedCol == 4){
+                document.querySelector("#sky").setAttribute('color', 'green');
+            }
+            if(storedCol == 5){
+                document.querySelector("#sky").setAttribute('color', 'yellow');
+            }
+            if(storedCol == 6){
+                document.querySelector("#sky").setAttribute('color', 'pink');
+            }
+            if(storedCol == 7){
+                document.querySelector("#sky").setAttribute('color', 'white');
+            }
+            if(storedCol == 8){
+                document.querySelector("#sky").setAttribute('color', 'orange');
+            }
+        }
+
+
+})
+      
+      </script>
+
       <script>
           
           document.querySelector("#card3").addEventListener('click', function() {
                 
-                var bgColors = ['red','blue','green','yellow','pink','white'];
-                var chosenCol = bgColors[Math.floor(Math.random() * bgColors.length)];
-                console.log(chosenCol);
-              
-                localStorage.setItem('bgCol',chosenCol); document.querySelector('#sky').setAttribute('color',localStorage.getItem('bgCol'));
+            window.location.href = "/VRG";
+
             });
           
           document.querySelector("#card2").addEventListener('click', function() {
               
-              if(document.querySelector('#sky').getAttribute('src')=='#sky2'){
-                  document.querySelector('#sky').setAttribute('src','#sky1');
-              }
-              else{
-                  document.querySelector('#sky').setAttribute('src','#sky2');
-              }
-              
-              //document.querySelector('#sky').setAttribute('src','#sky2');
+            window.location.href = "/VRVG";
               
           });
+
+          document.querySelector("#card1").addEventListener('click', function() {
+              
+              window.location.href = "/VRS";
+                
+            });
       
-          storage = window.localStorage;
-          localStorage.setItem('user','Brad');
-          localStorage.setItem('bgCol','#222');
-          localStorage.setItem('uiFont','kelsonsans');
-          document.querySelector('#sky').setAttribute('color',localStorage.getItem('bgCol'));
+          //storage = window.localStorage;
+          //localStorage.setItem('user','Brad');
+          //localStorage.setItem('bgCol','#222');
+          //localStorage.setItem('uiFont','kelsonsans');
+          //document.querySelector('#sky').setAttribute('color',localStorage.getItem('bgCol'));
           
           
          //var sceneEl = document.querySelector('a-scene');
          // console.log(sceneEl.querySelector('#Username'));
-         document.querySelector('#welcomeText').setAttribute('text','value','Welcome Back, ' + localStorage.getItem('user'));
-          
+         //document.querySelector('#welcomeText').setAttribute('text','value','Welcome Back, ' + localStorage.getItem('user'));
+         
+         var thisUser = getCookie('userLoggedIn');
+
+         $.ajax({
+                url:"/getName/" + thisUser,
+                type:"GET",
+                success: function(result) {
+                    console.log(result);
+
+                    //var data = JSON.parse(result);
+                    //console.log(data[0].Name);
+
+                    $el = $("#welcomeText")[0];
+                    console.log($el);
+
+                    $el.setAttribute('text','value','Welcome Back, '+ result);
+                }
+            })  
+
+        
+
+
           setInterval(function(){
                 document.querySelector("#clock").setAttribute('text','value',(new Date()).toLocaleTimeString());
           }, 1000);
           
           setInterval(function(){
-                document.querySelector("#vars").setAttribute('text','value','Name: ' + localStorage.getItem('user') + ', Background Colour: ' + localStorage.getItem('bgCol') + ', UI Font: ' + localStorage.getItem('uiFont'));
+
+             var font = document.querySelector("#welcomeText").getAttribute('text').font;
+             var bgColour = document.querySelector("#sky").getAttribute('color');
+             var fontColour = document.querySelector("#welcomeText").getAttribute('text').color;
+
+                document.querySelector("#vars").setAttribute('text','value','Username: ' + getCookie('userLoggedIn') + ', Background Colour: ' + bgColour + ', UI Font: ' + font);
           }, 1000);
           
           

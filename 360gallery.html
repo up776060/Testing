@@ -1,0 +1,171 @@
+<html>
+  <head>
+      <Title>UP776060 Final Year Project Web VR Dashboard Gallery</Title>
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+
+<body>
+
+    <script type="text/javascript">
+
+            // Original JavaScript code by Chirp Internet: www.chirp.com.au
+            // Please acknowledge use of this code by including this header.
+    
+            function getCookie(name)
+            {
+            var re = new RegExp(name + "=([^;]+)");
+            var value = re.exec(document.cookie);
+            return (value != null) ? unescape(value[1]) : null;
+            }
+    </script>
+
+    <a-scene>
+
+        <a-assets>
+
+            <img id="sky1" src="3601.jpg"> 
+
+            <img id="img1" src="SaetiaCay.jpg">
+            <img id="img2" src="41608506441_ab8696d836_o-2.jpg">
+            <img id="img3" src="3601.jpg">
+
+            <img id="im1con" src="im2con.jpg">
+            <img id="im2con" src="im1con.jpg">
+            <img id="im3con" src="im3con.jpg">
+
+            <img id="setWall" src="setWallpaper.jpg">
+            <img id="save" src="save.jpg">
+
+        </a-assets>
+
+        <a-sky id="sky" src="#sky1">
+
+        </a-sky>
+
+        <a-entity id="title" position="0 1.95 -1" text="font: kelsonsans; color: white; value: VR Gallery App; width:3; align: center; opacity: 1" ></a-entity>
+
+
+        <a-image id="icon1" position = "-0.5 1.5 -1" src="#im1con" height="0.3" width="0.3"></a-image>
+        <a-image id="icon2" position = "-0 1.5 -1" src="#im2con" height="0.3" width="0.3"></a-image>
+        <a-image id="icon3" position = "0.5 1.5 -1" src="#im3con" height="0.3" width="0.3"></a-image>
+
+
+        <a-image id="savexit" src="#save" position = "0 0.5 0" rotation = "-90 0 0"height="0.3" width="0.6"></a-image>
+
+        <a-entity camera look-controls position="0 1.6 0">
+
+                <a-cursor id="cursor" color="blue"></a-cursor>
+
+        </a-entity>
+
+
+    </a-scene>
+
+
+    <script>
+        
+        var thisUser = getCookie('userLoggedIn');
+        console.log(thisUser);
+
+        var thisUrl = "/getSettings/" + thisUser;
+        console.log(thisUrl);
+
+        $.ajax({
+
+            url:thisUrl,
+            type:"GET",
+
+            success: function(result) {
+            console.log(result);
+
+            var storedFont = result[0].font;
+            var storedFontCol = result[0].fontCol;
+
+            // Font
+
+            if (storedFont == 1){
+                document.querySelector("#title").setAttribute('text','font', 'roboto');
+            }
+
+            if (storedFont == 2){
+                document.querySelector("#title").setAttribute('text','font', 'kelsonsans');
+            }
+
+            if (storedFont == 3){
+                document.querySelector("#title").setAttribute('text','font', 'mozillavr');
+            }
+
+            if (storedFont == 4){
+                document.querySelector("#title").setAttribute('text','font', 'exo2bold');
+            }
+
+            // Font Colour
+
+            if(storedFontCol == 1){
+                document.querySelector("#title").setAttribute('text','color', 'black');
+            }
+            if(storedFontCol == 2){
+                document.querySelector("#title").setAttribute('text','color', 'red');            
+            }
+            if(storedFontCol == 3){
+                document.querySelector("#title").setAttribute('text','color', 'blue');            
+            }
+            if(storedFontCol == 4){
+                document.querySelector("#title").setAttribute('text','color', 'green');            
+            }
+            if(storedFontCol == 5){
+                document.querySelector("#title").setAttribute('text','color', 'yellow');            
+            }
+            if(storedFontCol == 6){
+                document.querySelector("#title").setAttribute('text','color', 'pink');            
+            }
+            if(storedFontCol == 7){
+                document.querySelector("#title").setAttribute('text','color', 'white');            
+            }
+            if(storedFontCol == 8){
+                document.querySelector("#title").setAttribute('text','color', 'orange');            
+            }
+
+        }
+
+
+        })
+    
+    
+
+    </script>
+
+    <script>
+
+        document.querySelector("#icon1").addEventListener('click', function(){
+        
+            document.querySelector("#sky").setAttribute("src","#img1");
+
+        });
+
+        document.querySelector("#icon2").addEventListener('click', function(){
+        
+            document.querySelector("#sky").setAttribute("src","#img2");
+
+        });
+
+        document.querySelector("#icon3").addEventListener('click', function(){
+        
+            document.querySelector("#sky").setAttribute("src","#img3");
+
+        });
+
+    </script>
+
+    <script>
+        document.querySelector("#savexit").addEventListener('click', function(){
+            window.location.href = "/";
+        });
+    </script>
+
+</body>
+
+
+</html>
